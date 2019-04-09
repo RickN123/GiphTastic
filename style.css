@@ -1,8 +1,16 @@
+* {
+    box-sizing: border-box;
+  }
+
+  @media screen and (max-width: 600px) {
+    
+    }
 body {
 margin-left:auto;
 image-rendering: :auto;
 margin-right:auto;
 position: relative;
+image:fill;
 
 
 }
