@@ -43,6 +43,30 @@
         <script type="text/javascript">
 
 
+            $("#add-team").on("click", function (event) {
+                event.preventDefault();
+
+                var team = $("#team-input").val().trim();
+
+                team.push(team);
+
+
+                renderButtons();
+            });
+            $("button").on("click", function () {
+
+                var team = $(this).attr("data-team");
+
+                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+                    team + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+
+                })
+
+
         </script>
 </body>
 
