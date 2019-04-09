@@ -3,14 +3,22 @@
   }
 
   @media screen and (max-width: 1000px) {
+
     
     }
 body {
 margin-left:auto;
+box-align: top;
 image-rendering: :auto;
 margin-right:auto;
 image:fill;
 display: inline;
 float: :left;
+
+}
+
+#buttons{
+
+align-content: left;
 
 }
