@@ -40,15 +40,16 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">
-
+            var teams = ["Philadelphia Flyers", "Rocky", "76ers", "Philadelphia Eagles", "Villanova Wildcats"];
 
             $("#add-team").on("click", function (event) {
+
                 event.preventDefault();
+
 
                 var team = $("#team-input").val().trim();
 
-                team.push(team);
-
+                teams.push(team);
 
                 renderButtons();
             });
