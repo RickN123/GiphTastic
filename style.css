@@ -9,9 +9,8 @@ body {
 margin-left:auto;
 image-rendering: :auto;
 margin-right:auto;
-position: relative;
 image:fill;
 display: inline;
-
+float: :left;
 
 }
