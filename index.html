@@ -105,10 +105,10 @@
                 // Then, set the image's data-state to animate
                 // Else set src to the data-still value
                 if (state === "still") {
-                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("src", $(this).attr("team-animate"));
                     $(this).attr("team-state", "animate");
                 } else {
-                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("src", $(this).attr("team-still"));
                     $(this).attr("team-state", "still");
                 }
             });
