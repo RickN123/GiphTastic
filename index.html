@@ -27,7 +27,6 @@
             <input id="add-team" type="submit" value="Add Your Favorite Team!">
 
         </form>
-
         <button data-team="Philadelphia Flyers">Get Flyered Up!</button>
         <button data-team="Rocky">Aaaadrian!</button>
         <button data-team="76ers">10-9-8-76ers!</button>
@@ -98,7 +97,20 @@
                         }
                     });
             });
-
+            $(".gif").on("click", function () {
+                // bryan - The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+                var state = $(this).attr("data-state");
+                // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+                // Then, set the image's data-state to animate
+                // Else set src to the data-still value
+                if (state === "still") {
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("data-state", "animate");
+                } else {
+                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("data-state", "still");
+                }
+            });
         </script>
 </body>
 
