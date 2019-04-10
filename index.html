@@ -56,50 +56,56 @@
 
                 renderButtons();
             });
-            $("button").on("click", function () {
 
-                var team = $(this).attr("data-team");
-
-                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-                    team + "&api_key=dc6zaTOxFJmzC&limit=10";
+            function renderButtons(team) {
+                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + team + "&api_key=dc6zaTOxFJmzC&limit=10";
 
                 $.ajax({
                     url: queryURL,
                     method: "GET"
 
-                })
+                }).then(function (response) {
+                    $("#gifs-appear-here").empty()
 
-                    .then(function (response) {
-                        $("#gifs-appear-here").empty()
+                    var results = response.data;
 
-                        var results = response.data;
+                    for (var i = 0; i < results.length; i++) {
 
-                        for (var i = 0; i < results.length; i++) {
+                        if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
 
-                            if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+                            var gifDiv = $("<div>");
 
-                                var gifDiv = $("<div>");
+                            var rating = results[i].rating;
 
-                                var rating = results[i].rating;
+                            var p = $("<p>").text("Rating: " + rating);
 
-                                var p = $("<p>").text("Rating: " + rating);
+                            var teamImage = $("<img>");
 
-                                var teamImage = $("<img>");
-
-                                teamImage.attr("src", results[i].images.fixed_height.url);
-                                ///bryan - create another attribute called data-still will have url of still image
-                                ///create another attribute called data-animate will have url of image
-                                ///create another attribute called data-state will be set to still or animate
+                            teamImage.attr("src", results[i].images.fixed_height.url);
+                            ///bryan - create another attribute called data-still will have url of still image
+                            ///create another attribute called data-animate will have url of image
+                            ///create another attribute called data-state will be set to still or animate
 
 
-                                gifDiv.append(p);
-                                gifDiv.append(teamImage);
+                            gifDiv.append(p);
+                            gifDiv.append(teamImage);
 
-                                $("#gifs-appear-here").prepend(gifDiv);
-                            }
+                            $("#gifs-appear-here").prepend(gifDiv);
                         }
-                    });
+                    }
+                });
+            }
+
+
+
+            $("button").on("click", function () {
+
+                var team = $(this).attr("data-team");
+                renderButtons(team)
             });
+
+
+            // Gif click
             $(".gif").on("click", function () {
                 // bryan - The attr jQuery method allows us to get or set the value of any attribute on our HTML element
                 var state = $(this).attr("data-state");
