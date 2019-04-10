@@ -29,11 +29,7 @@
 
         </form>
         <div id="buttons">
-            <!--<button data-team="Philadelphia Flyers">Get Flyered Up!</button>
-            <button data-team="Rocky">Aaaadrian!</button>
-            <button data-team="76ers">10-9-8-76ers!</button>
-            <button data-team="Philadelphia Eagles">Fly Eagles Fly!</button>
-            <button data-team="Villanova Wildcats">Go Cats!</button>-->
+
         </div>
 
         <div id="gifs-appear-here">
@@ -65,17 +61,14 @@
                 }
             }
             renderButtons();
-
             function renderGifs(team) {
                 var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + team + "&api_key=dc6zaTOxFJmzC&limit=10";
-
                 $.ajax({
                     url: queryURL,
                     method: "GET"
 
                 }).then(function (response) {
                     $("#gifs-appear-here").empty()
-
                     var results = response.data;
 
                     for (var i = 0; i < results.length; i++) {
@@ -87,13 +80,13 @@
                             var rating = results[i].rating;
 
                             var p = $("<p>").text("Rating: " + rating);
-
                             var teamImage = $("<img>");
+                            teamImage.attr('team-animate', results[i].images.fixed_height.url);
+                            teamImage.attr('team-still', results[i].images.fixed_height.url.replace('.gif', '_s.gif'));
+                            teamImage.addClass("gif")
 
                             teamImage.attr("src", results[i].images.fixed_height.url);
-                            ///bryan - create another attribute called data-still will have url of still image
-                            ///create another attribute called data-animate will have url of image
-                            ///create another attribute called data-state will be set to still or animate
+
 
 
                             gifDiv.append(p);
@@ -108,19 +101,15 @@
 
 
             $(document).on("click", "button", function () {
-                // var team = $(this).attr("data-team");
                 var team = $(this).html();
                 renderGifs(team);
             });
 
 
-            // Gif click
+
             $(document).on("click", ".gif", function () {
-                // bryan - The attr jQuery method allows us to get or set the value of any attribute on our HTML element
                 var state = $(this).attr("data-state");
-                // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-                // Then, set the image's data-state to animate
-                // Else set src to the data-still value
+
                 if (state === "still") {
                     $(this).attr("src", $(this).attr("team-animate"));
                     $(this).attr("data-state", "animate");
