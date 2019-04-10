@@ -28,12 +28,12 @@
             <input id="add-team" type="submit" value="Add Your Favorite Team!">
 
         </form>
-        <div buttons>
-            <button data-team="Philadelphia Flyers">Get Flyered Up!</button>
+        <div id="buttons">
+            <!--<button data-team="Philadelphia Flyers">Get Flyered Up!</button>
             <button data-team="Rocky">Aaaadrian!</button>
             <button data-team="76ers">10-9-8-76ers!</button>
             <button data-team="Philadelphia Eagles">Fly Eagles Fly!</button>
-            <button data-team="Villanova Wildcats">Go Cats!</button>
+            <button data-team="Villanova Wildcats">Go Cats!</button>-->
         </div>
 
         <div id="gifs-appear-here">
@@ -56,68 +56,78 @@
                 renderButtons(team);
             });
 
-            function renderButtons(team) {
-                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + team + "&api_key=dc6zaTOxFJmzC&limit=10";
+            function renderButtons() {
 
-                $.ajax({
-                    url: queryURL,
-                    method: "GET"
+                for (var i = 0; i < teams.length; i++) {
+                    var team = teams[i]
+                    $("#buttons").append
 
-                }).then(function (response) {
-                    $("#gifs-appear-here").empty()
-
-                    var results = response.data;
-
-                    for (var i = 0; i < results.length; i++) {
-
-                        if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
-
-                            var gifDiv = $("<div>");
-
-                            var rating = results[i].rating;
-
-                            var p = $("<p>").text("Rating: " + rating);
-
-                            var teamImage = $("<img>");
-
-                            teamImage.attr("src", results[i].images.fixed_height.url);
-                            ///bryan - create another attribute called data-still will have url of still image
-                            ///create another attribute called data-animate will have url of image
-                            ///create another attribute called data-state will be set to still or animate
+                }
 
 
-                            gifDiv.append(p);
-                            gifDiv.append(teamImage);
 
-                            $("#gifs-appear-here").prepend(gifDiv);
+                function renderGifs(team) {
+                    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + team + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+                    $.ajax({
+                        url: queryURL,
+                        method: "GET"
+
+                    }).then(function (response) {
+                        $("#gifs-appear-here").empty()
+
+                        var results = response.data;
+
+                        for (var i = 0; i < results.length; i++) {
+
+                            if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+
+                                var gifDiv = $("<div>");
+
+                                var rating = results[i].rating;
+
+                                var p = $("<p>").text("Rating: " + rating);
+
+                                var teamImage = $("<img>");
+
+                                teamImage.attr("src", results[i].images.fixed_height.url);
+                                ///bryan - create another attribute called data-still will have url of still image
+                                ///create another attribute called data-animate will have url of image
+                                ///create another attribute called data-state will be set to still or animate
+
+
+                                gifDiv.append(p);
+                                gifDiv.append(teamImage);
+
+                                $("#gifs-appear-here").prepend(gifDiv);
+                            }
                         }
+                    });
+                }
+
+
+
+                $("button").on("click", function () {
+                    var team = $(this).attr("data-team");
+                    renderGifs(team)
+                });
+
+
+                // Gif click
+                $(".gif").on("click", function () {
+                    // bryan - The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+                    var state = $(this).attr("data-state");
+                    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+                    // Then, set the image's data-state to animate
+                    // Else set src to the data-still value
+                    if (state === "still") {
+                        $(this).attr("src", $(this).attr("team-animate"));
+                        $(this).attr("data-state", "animate");
+                    } else {
+                        $(this).attr("src", $(this).attr("team-still"));
+                        $(this).attr("data-state", "still");
                     }
                 });
-            }
-
-
-
-            $("button").on("click", function () {
-                var team = $(this).attr("data-team");
-                renderButtons(team)
-            });
-
-
-            // Gif click
-            $(".gif").on("click", function () {
-                // bryan - The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-                var state = $(this).attr("data-state");
-                // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-                // Then, set the image's data-state to animate
-                // Else set src to the data-still value
-                if (state === "still") {
-                    $(this).attr("src", $(this).attr("team-animate"));
-                    $(this).attr("data-state", "animate");
-                } else {
-                    $(this).attr("src", $(this).attr("team-still"));
-                    $(this).attr("data-state", "still");
-                }
-            });
         </script>
 </body>
 
