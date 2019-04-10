@@ -13,7 +13,8 @@ image-rendering: :auto;
 margin-right:auto;
 image:fill;
 display: inline;
-float: :left;
+float: :absolute;
+position: relative;
 image:auto;
 }
 
