@@ -81,8 +81,8 @@
 
                             var p = $("<p>").text("Rating: " + rating);
                             var teamImage = $("<img>");
-                            teamImage.attr('team-still', results[i].images.fixed_height.url);
-                            teamImage.attr('team-animate', results[i].images.fixed_height.url.replace('_s.gif', '.gif'));
+                            teamImage.attr('team-still', results[i].images.fixed_height.url.replace('_s.gif', '.gif'));
+                            teamImage.attr('team-animate', results[i].images.fixed_height.url);
                             teamImage.addClass("gif")
 
                             teamImage.attr("src", results[i].images.fixed_height.url);
