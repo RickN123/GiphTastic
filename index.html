@@ -81,11 +81,13 @@
 
                             var p = $("<p>").text("Rating: " + rating);
                             var teamImage = $("<img>");
-                            teamImage.attr('team-animate', results[i].images.fixed_height.url);
-                            teamImage.attr('team-still', results[i].images.fixed_height.url.replace('.gif', '_s.gif'));
+                            teamImage.attr('team-animate', results[i].images.fixed_height.url.replace('.gif', '_s.gif'));
+                            teamImage.attr('team-still', results[i].images.fixed_height.url);
                             teamImage.addClass("gif")
 
                             teamImage.attr("src", results[i].images.fixed_height.url);
+
+
 
 
 
@@ -93,6 +95,10 @@
                             gifDiv.append(teamImage);
 
                             $("#gifs-appear-here").prepend(gifDiv);
+                            teamImage.attr("src", teamImage.attr("team-animate"));
+                            teamImage.attr("data-state", "animate");
+
+
                         }
                     }
                 });
@@ -109,11 +115,12 @@
 
             $(document).on("click", ".gif", function () {
                 var state = $(this).attr("data-state");
-
                 if (state === "animate") {
                     $(this).attr("src", $(this).attr("team-still"));
                     $(this).attr("data-state", "still");
-
+                } else {
+                    $(this).attr("src", $(this).attr("team-animate"));
+                    $(this).attr("data-state", "animate");
                 }
             });
         </script>
