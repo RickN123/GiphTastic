@@ -49,12 +49,11 @@
 
                 event.preventDefault();
 
-
                 var team = $("#team-input").val().trim();
 
                 teams.push(team);
 
-                renderButtons();
+                renderButtons(team);
             });
 
             function renderButtons(team) {
@@ -99,7 +98,6 @@
 
 
             $("button").on("click", function () {
-
                 var team = $(this).attr("data-team");
                 renderButtons(team)
             });
