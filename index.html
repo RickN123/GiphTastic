@@ -110,12 +110,10 @@
             $(document).on("click", ".gif", function () {
                 var state = $(this).attr("data-state");
 
-                if (state === "still") {
-                    $(this).attr("src", $(this).attr("team-animate"));
-                    $(this).attr("data-state", "animate");
-                } else {
+                if (state === "animate") {
                     $(this).attr("src", $(this).attr("team-still"));
                     $(this).attr("data-state", "still");
+
                 }
             });
         </script>
