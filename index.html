@@ -13,8 +13,9 @@
     <div class="width=100% p-3 mb-2 bg-primary text-white text-center">
         <h1>Favorite Philadelphia Teams</h1>
 
-        <img class="images-returned" team-still="https://media3.giphy.com/media1"
-            team-animate="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200.gif" team-state="still" class="gif">
+        <img class="images-returned" team-still="https://media3.giphy.com/media/"
+            team-animate="https://media3.giphy.com/media/mO9vPApYnQa1a/200.gif?cid=e1bb72ff5cad4168313346672ec2b3d5"
+            team-state="still" class="gif">
 
         <div id="buttons-view">
 
@@ -102,16 +103,16 @@
             });
             $(".gif").on("click", function () {
                 // bryan - The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-                var state = $(this).attr("team-state");
+                var state = $(this).attr("data-state");
                 // If the clicked image's state is still, update its src attribute to what its data-animate value is.
                 // Then, set the image's data-state to animate
                 // Else set src to the data-still value
                 if (state === "still") {
                     $(this).attr("src", $(this).attr("team-animate"));
-                    $(this).attr("team-state", "animate");
+                    $(this).attr("data-state", "animate");
                 } else {
                     $(this).attr("src", $(this).attr("team-still"));
-                    $(this).attr("team-state", "still");
+                    $(this).attr("data-state", "still");
                 }
             });
         </script>
