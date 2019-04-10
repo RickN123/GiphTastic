@@ -14,16 +14,19 @@ margin-right:auto;
 image:fill;
 display: inline;
 float: :left;
-
+image:auto;
 }
 
 #buttons{
 
 align-content: left;
+position:left;
+
+
 
 }
 #gifs-appear-here{
-
+image-rendering: auto;
 width: 80%;
-height: 25%;
+height: 5%;
 }
